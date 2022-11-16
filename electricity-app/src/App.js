@@ -2,13 +2,13 @@ import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Button } from 'reactstrap';
+import Base from './components/Base';
 
 function App() {
   return (
-    <div className="App">
-      <h1>This is my homepage</h1>
-      <Button></Button>
-    </div>
+    <Base>
+      <h1>This is App component</h1>
+    </Base>
   );
 }
 
