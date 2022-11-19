@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Button,
     Card,
@@ -14,7 +14,51 @@ import {
 } from 'reactstrap'
 import Base from '../components/Base'
 
+
+
 const Signup = () => {
+
+    const [data, setData]=useState({
+        name:'',
+        address:'',
+        email:'',
+        password:'',
+    })
+
+    const [error, seterror]=useState({
+        errors:{},
+        isError:false
+    })
+
+    useEffect(() => {
+        console.log(data);
+    }, [data])
+
+    //handle change
+    const handleChange=(event,property)=>{
+        //dynamic setting of values
+        setData({...data,[property]:event.target.value})
+    }
+
+    //resetting the form
+    const resetData=() => {
+    setData({
+        name:'',
+        address:'',
+        email:'',
+        password:'',
+    })
+}
+
+//submit the form
+const submitForm=(event)=>{
+    event.preventDefault()
+    console.log(data);
+    //data validate
+
+    //call server api for sending data
+}
+
     return (
         <Base>
             <Container>
@@ -26,7 +70,7 @@ const Signup = () => {
                             </CardHeader>
                             <CardBody>
                                 {/*creating form*/}
-                                <Form>
+                                <Form onSubmit={submitForm}>
                                     {/* Name Field */}
                                     <FormGroup>
                                         <Label for="name">Enter Name</Label>
@@ -34,6 +78,8 @@ const Signup = () => {
                                             type="text"
                                             placeholder="Enter Here"
                                             id="name"
+                                            onChange={(e)=>handleChange(e,'name')}
+                                            value={data.name}
                                         />
                                     </FormGroup>
 
@@ -46,6 +92,8 @@ const Signup = () => {
                                             type="address"
                                             placeholder="Enter Here"
                                             id="address"
+                                            onChange={(e)=>handleChange(e,'address')}
+                                            value={data.address}
                                         />
                                     </FormGroup>
 
@@ -56,6 +104,8 @@ const Signup = () => {
                                             type="email"
                                             placeholder="Enter Here"
                                             id="email"
+                                            onChange={(e)=>handleChange(e,'email')}
+                                            value={data.email}
                                         />
                                     </FormGroup>
 
@@ -68,6 +118,8 @@ const Signup = () => {
                                             type="password"
                                             placeholder="Enter Here"
                                             id="password"
+                                            onChange={(e)=>handleChange(e,'password')}
+                                            value={data.password}
                                         />
                                     </FormGroup>
 
@@ -80,6 +132,7 @@ const Signup = () => {
                                             outline
                                             type="reset"
                                             className="ms-2"
+                                            onClick={resetData}
                                         >
                                             Reset
                                         </Button>
